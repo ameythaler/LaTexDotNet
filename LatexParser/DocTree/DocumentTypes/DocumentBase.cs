@@ -18,6 +18,12 @@ namespace LaTexParser.DocTree.DocumentTypes
             leqno = 4,
             fleqn = 8
         }
+
+        public struct AuthorEntry
+        {
+            public string Author;
+            public string Thanks;
+        }
         #endregion
 
         #region Public Properties
@@ -30,6 +36,17 @@ namespace LaTexParser.DocTree.DocumentTypes
         {
             get { return titleLines; }
         }
+
+        public List<AuthorEntry> Authors
+        {
+            get { return authors; }
+        }
+
+        public string Date
+        {
+            get { return date; }
+            set { date = value; }
+        }
         #endregion
 
         #region Public Methods
@@ -38,11 +55,25 @@ namespace LaTexParser.DocTree.DocumentTypes
             this.fontSize = fontSize;
             this.layoutFlags = layoutFlags;
             titleLines = new List<string>();
+            authors = new List<AuthorEntry>();
         }
 
         public void AddTitleLine(string newLine)
         {
             titleLines.Add(newLine);
+        }
+
+        public void AddAuthor(string author)
+        {
+            AuthorEntry entry;
+            entry.Author = author;
+            entry.Thanks = null;
+            authors.Add(entry);
+        }
+
+        public void AddAuthorThanks(string thanks)
+        {
+
         }
         #endregion
 
@@ -50,6 +81,8 @@ namespace LaTexParser.DocTree.DocumentTypes
         int fontSize;
         LayoutFlags layoutFlags;
         List<string> titleLines;
+        List<AuthorEntry> authors;
+        string date;
         #endregion
     }
 }

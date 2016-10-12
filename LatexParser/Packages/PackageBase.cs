@@ -123,12 +123,23 @@ namespace LaTexParser.Packages
 
             int paramDelimIdx = Utilities.FindDelimiterIgnoreLineBreak(text, kParamDelimiter, paramStartIdx);
             
-            if (paramStartIdx == -1)
+            if (paramDelimIdx == -1)
                 throw new Exceptions.InvalidLaTexSyntaxException("Missing ending \'}\' in parameters.");
 
             ++paramStartIdx; // Remove leading open-brace.
-            string parameter = text.Substring(paramStartIdx, paramDelimIdx - paramStartIdx);
-            return parameter;
+            return text.Substring(paramStartIdx, paramDelimIdx - paramStartIdx);
+        }
+
+        protected string GetUnscopedParameter(string text)
+        {
+            int paramStartIdx = 1;
+
+            int paramDelimIdx = Utilities.FindDelimiterIgnoreLineBreak(text, kParamDelimiter, paramStartIdx);
+
+            if (paramDelimIdx == -1)
+                throw new Exceptions.InvalidLaTexSyntaxException("Missing ending \'}\' in parameters.");
+
+            return text.Substring(paramStartIdx, paramDelimIdx - paramStartIdx);
         }
         #endregion
     }

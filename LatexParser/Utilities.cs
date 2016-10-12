@@ -27,5 +27,18 @@ namespace LaTexParser
             }
             return delimIdx;
         }
+
+        public static T FindTop<T>(DocTree.DocElement startElement) where T : class
+        {
+            while(startElement != null && !(startElement is T))
+            {
+                startElement = startElement.Parent;
+            }
+
+            if (startElement != null)
+                return startElement as T;
+            else
+                return null;
+        }
     }
 }

@@ -20,16 +20,22 @@ namespace LaTexParser.Packages
         public BasePackage()
         {
             commands = new Dictionary<string, CommandPair>();
+            authorCommands = new Dictionary<string, CommandPair>();
 
             commands["documentstyle"] = new CommandPair(ParseDocumentStyle, null);
             commands["documentclass"] = new CommandPair(ParseDocumentClass, null);
             commands["usepackage"] = new CommandPair(ParseUsePackage, null);
             commands["title"] = new CommandPair(ParseTitle, null);
+            commands["author"] = new CommandPair(ParseAuthor, authorCommands);
+            commands["date"] = new CommandPair(ParseDate, null);
+
+            authorCommands["thanks"] = new CommandPair(ParseAuthorThanks, null);
+            authorCommands["and"] = new CommandPair(ParseAuthorAnd, null);
         }
         #endregion
 
         #region Private Fields
-
+        Dictionary<string, CommandPair> authorCommands;
         #endregion
 
         #region Private Methods
@@ -88,18 +94,55 @@ namespace LaTexParser.Packages
 
         private void ParseTitle(ParserState state, string parameters)
         {
-            DocTree.DocElement topElement = state.Document.PeekElement();
-            while (topElement != null && !(topElement is DocumentBase))
-                topElement = topElement.Parent;
-
-            if(topElement != null)
+            DocumentBase doc = Utilities.FindTop<DocumentBase>(state.Document.PeekElement());
+            if(doc != null)
             {
                 string title = GetParameter(parameters);
-                DocumentBase doc = topElement as DocumentBase;
                 string[] titleLines = title.Split(kLineBreak, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string line in titleLines)
-                    doc.AddTitleLine(line);
+                    doc.AddTitleLine(line.Trim());
             }
+        }
+
+        private void ParseAuthor(ParserState state, string parameters)
+        {
+            DocumentBase doc = Utilities.FindTop<DocumentBase>(state.Document.PeekElement());
+            if (doc != null)
+            {
+                string author = GetParameter(parameters);
+                doc.AddAuthor(author.Trim());
+            }
+        }
+
+        private void ParseDate(ParserState state, string parameters)
+        {
+            DocumentBase doc = Utilities.FindTop<DocumentBase>(state.Document.PeekElement());
+            if (doc != null)
+            {
+                string date = GetParameter(parameters);
+                doc.Date = date.Trim();
+            }
+        }
+
+        private void ParseAuthorThanks(ParserState state, string parameters)
+        {
+            DocumentBase doc = Utilities.FindTop<DocumentBase>(state.Document.PeekElement());
+            if (doc != null)
+            {
+                string thanks = GetParameter(parameters);
+                doc.AddAuthorThanks(thanks.Trim());
+            }
+        }
+
+        private void ParseAuthorAnd(ParserState state, string parameters)
+        {
+            DocumentBase doc = Utilities.FindTop<DocumentBase>(state.Document.PeekElement());
+            if (doc != null)
+            {
+                string author = GetUnscopedParameter(parameters);
+                doc.AddAuthor(author.Trim());
+            }
+            state.ShouldPopCommandScope = true;
         }
         #endregion
     }

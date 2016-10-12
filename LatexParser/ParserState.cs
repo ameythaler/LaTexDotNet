@@ -24,6 +24,12 @@ namespace LaTexParser
         {
             get { return commandScopeStack; }
         }
+
+        public bool ShouldPopCommandScope
+        {
+            get { return shouldPopCommandScope; }
+            set { shouldPopCommandScope = true; }
+        }
         #endregion
 
         #region Public Methods
@@ -33,6 +39,7 @@ namespace LaTexParser
             loadedPackages = new List<Packages.PackageBase>();
             loadedPackages.Add(new Packages.BasePackage());
             commandScopeStack = new List<string>();
+            shouldPopCommandScope = false;
         }
 
         public void AddPackage(Packages.PackageBase newPackage)
@@ -52,12 +59,22 @@ namespace LaTexParser
             if(commandScopeStack.Count > 0)
                 commandScopeStack.RemoveAt(commandScopeStack.Count - 1);
         }
+
+        public void Update()
+        {
+            if(shouldPopCommandScope)
+            {
+                PopCommandScope();
+                shouldPopCommandScope = false;
+            }
+        }
         #endregion
 
         #region Private Fields
         private Document document;
         private List<Packages.PackageBase> loadedPackages;
         private List<string> commandScopeStack;
+        private bool shouldPopCommandScope;
         #endregion
     }
 }

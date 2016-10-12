@@ -71,6 +71,7 @@ namespace LaTexParser
                 if (pkg.Parse(parserState, text))
                     break;
             }
+            parserState.Update();
 
             return text;
         }
