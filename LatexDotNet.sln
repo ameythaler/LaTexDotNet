@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexParser", "LatexParser\LaTexParser.csproj", "{D6F8FC36-5706-4E6C-8CC6-614767225C9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFTest", "WPFTest\WPFTest.csproj", "{5A8552BF-9BE2-4565-B617-28C9DFF06E80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexViewWPF", "LaTexTextViewWPF\LaTexViewWPF.csproj", "{C1644383-84AD-4B67-9117-CB5A5051F27E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6F8FC36-5706-4E6C-8CC6-614767225C9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6F8FC36-5706-4E6C-8CC6-614767225C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6F8FC36-5706-4E6C-8CC6-614767225C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6F8FC36-5706-4E6C-8CC6-614767225C9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A8552BF-9BE2-4565-B617-28C9DFF06E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A8552BF-9BE2-4565-B617-28C9DFF06E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A8552BF-9BE2-4565-B617-28C9DFF06E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A8552BF-9BE2-4565-B617-28C9DFF06E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1644383-84AD-4B67-9117-CB5A5051F27E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1644383-84AD-4B67-9117-CB5A5051F27E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1644383-84AD-4B67-9117-CB5A5051F27E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1644383-84AD-4B67-9117-CB5A5051F27E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
