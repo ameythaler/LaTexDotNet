@@ -64,6 +64,8 @@ namespace LaTexParser.Packages
             }
             return true;
         }
+
+        
         #endregion
 
         #region Protected Fields
@@ -73,6 +75,7 @@ namespace LaTexParser.Packages
         protected const char kOptionEnd = ']';
         protected readonly char[] kParamDelimiter = new char[] { '}', '\\' };
         protected readonly char[] kOptionsDelimiter = new char[] { ',' };
+        protected readonly string[] kLineBreak = new string[] { "\\\\" };
         #endregion
 
         #region Protected Methods
@@ -112,18 +115,19 @@ namespace LaTexParser.Packages
             return options.Split(kOptionsDelimiter);
         }
 
-        protected string GetParameter(ref string text)
+        protected string GetParameter(string text)
         {
             int paramStartIdx = text.IndexOf(kParamStart);
             if (paramStartIdx == -1)
                 return null;
-            int paramDelimIdx = text.IndexOfAny(kParamDelimiter, paramStartIdx);
-            if (paramDelimIdx == -1)
+
+            int paramDelimIdx = Utilities.FindDelimiterIgnoreLineBreak(text, kParamDelimiter, paramStartIdx);
+            
+            if (paramStartIdx == -1)
                 throw new Exceptions.InvalidLaTexSyntaxException("Missing ending \'}\' in parameters.");
 
             ++paramStartIdx; // Remove leading open-brace.
             string parameter = text.Substring(paramStartIdx, paramDelimIdx - paramStartIdx);
-            text = text.Substring(parameter.Length + 1);
             return parameter;
         }
         #endregion

@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace LaTexParser.DocTree.DocumentTypes
 {
-    class Article : DocumentBase
+    public class Article : DocumentBase
     {
+        #region Public Methods
+        public Article(int fontSize, LayoutFlags layoutFlags) : base(fontSize, layoutFlags)
+        {
+
+        }
+        #endregion
     }
 }
