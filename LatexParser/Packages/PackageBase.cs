@@ -121,7 +121,9 @@ namespace LaTexParser.Packages
             if (paramStartIdx == -1)
                 return null;
 
-            int paramDelimIdx = Utilities.FindDelimiterIgnoreLineBreak(text, kParamDelimiter, paramStartIdx);
+            int paramDelimIdx = Utilities.FindDelimiter(ref text, kParamDelimiter, paramStartIdx);
+            //int paramDelimIdx = Utilities.FindDelimiterIgnoreLineBreak(text, kParamDelimiter, paramStartIdx);
+            //int paramDelimIdx = text.IndexOfAny(kParamDelimiter, paramStartIdx);
             
             if (paramDelimIdx == -1)
                 throw new Exceptions.InvalidLaTexSyntaxException("Missing ending \'}\' in parameters.");

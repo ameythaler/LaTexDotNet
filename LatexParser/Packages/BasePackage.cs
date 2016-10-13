@@ -20,14 +20,17 @@ namespace LaTexParser.Packages
         public BasePackage()
         {
             commands = new Dictionary<string, CommandPair>();
+            titleCommands = new Dictionary<string, CommandPair>();
             authorCommands = new Dictionary<string, CommandPair>();
 
             commands["documentstyle"] = new CommandPair(ParseDocumentStyle, null);
             commands["documentclass"] = new CommandPair(ParseDocumentClass, null);
             commands["usepackage"] = new CommandPair(ParseUsePackage, null);
-            commands["title"] = new CommandPair(ParseTitle, null);
+            commands["title"] = new CommandPair(ParseTitle, titleCommands);
             commands["author"] = new CommandPair(ParseAuthor, authorCommands);
             commands["date"] = new CommandPair(ParseDate, null);
+
+            titleCommands["\\"] = new CommandPair(ParseTitleLineBreak, null);
 
             authorCommands["thanks"] = new CommandPair(ParseAuthorThanks, null);
             authorCommands["and"] = new CommandPair(ParseAuthorAnd, null);
@@ -35,6 +38,7 @@ namespace LaTexParser.Packages
         #endregion
 
         #region Private Fields
+        Dictionary<string, CommandPair> titleCommands;
         Dictionary<string, CommandPair> authorCommands;
         #endregion
 
@@ -98,10 +102,19 @@ namespace LaTexParser.Packages
             if(doc != null)
             {
                 string title = GetParameter(parameters);
-                string[] titleLines = title.Split(kLineBreak, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string line in titleLines)
-                    doc.AddTitleLine(line.Trim());
+                doc.AddTitleLine(title.Trim());
             }
+        }
+
+        private void ParseTitleLineBreak(ParserState state, string parameters)
+        {
+            DocumentBase doc = Utilities.FindTop<DocumentBase>(state.Document.PeekElement());
+            if (doc != null)
+            {
+                string title = GetUnscopedParameter(parameters);
+                doc.AddTitleLine(title.Trim());
+            }
+            state.ShouldPopCommandScope = true;
         }
 
         private void ParseAuthor(ParserState state, string parameters)

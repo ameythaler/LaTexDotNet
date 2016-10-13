@@ -38,7 +38,9 @@ namespace LaTexParser
 
         public string Parse(string text)
         {
-            int cmdIdx = Utilities.FindDelimiterIgnoreLineBreak(text, kEscapeChars, 0);
+            //int cmdIdx = Utilities.FindDelimiterIgnoreLineBreak(text, kEscapeChars, 0);
+            //int cmdIdx = text.IndexOfAny(kEscapeChars);
+            int cmdIdx = Utilities.FindDelimiter(ref text, kEscapeChars, 0);
             if (cmdIdx == -1)
                 return null;
 
