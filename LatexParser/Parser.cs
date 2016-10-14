@@ -82,7 +82,7 @@ namespace LaTexParser
         #region Private Fields
         private ParserState parserState;
         private readonly char[] kEscapeChars = { '\\', '%', '}' };
-        private readonly char[] kCommandEndChars = { '{', ' ', '\n', '\r', '[' };
+        private readonly char[] kCommandEndChars = { '{', ' ', '\n', '\r', '[', '}', ']' };
         private readonly char[] kNewLineChars = { '\n', '\r' };
         private const char kEndScopeChar = '}';
         private const char kCommentChar = '%';

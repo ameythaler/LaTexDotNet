@@ -66,6 +66,10 @@ namespace LaTexParser
                     char nextChar = text[escapeIdx + 1];
                     switch(nextChar)
                     {
+                        case '\\':
+                            ReplaceChars(ref text, escapeIdx, 2, '\n');
+                            retVal = true;
+                            break;
                         case '#':
                             ReplaceChars(ref text, escapeIdx, 2, '#');
                             retVal = true;

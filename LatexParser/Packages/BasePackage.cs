@@ -20,17 +20,14 @@ namespace LaTexParser.Packages
         public BasePackage()
         {
             commands = new Dictionary<string, CommandPair>();
-            titleCommands = new Dictionary<string, CommandPair>();
             authorCommands = new Dictionary<string, CommandPair>();
 
             commands["documentstyle"] = new CommandPair(ParseDocumentStyle, null);
             commands["documentclass"] = new CommandPair(ParseDocumentClass, null);
             commands["usepackage"] = new CommandPair(ParseUsePackage, null);
-            commands["title"] = new CommandPair(ParseTitle, titleCommands);
+            commands["title"] = new CommandPair(ParseTitle, null);
             commands["author"] = new CommandPair(ParseAuthor, authorCommands);
             commands["date"] = new CommandPair(ParseDate, null);
-
-            titleCommands["\\"] = new CommandPair(ParseTitleLineBreak, null);
 
             authorCommands["thanks"] = new CommandPair(ParseAuthorThanks, null);
             authorCommands["and"] = new CommandPair(ParseAuthorAnd, null);
@@ -38,7 +35,6 @@ namespace LaTexParser.Packages
         #endregion
 
         #region Private Fields
-        Dictionary<string, CommandPair> titleCommands;
         Dictionary<string, CommandPair> authorCommands;
         #endregion
 
@@ -102,19 +98,8 @@ namespace LaTexParser.Packages
             if(doc != null)
             {
                 string title = GetParameter(parameters);
-                doc.AddTitleLine(title.Trim());
+                doc.Title = title;
             }
-        }
-
-        private void ParseTitleLineBreak(ParserState state, string parameters)
-        {
-            DocumentBase doc = Utilities.FindTop<DocumentBase>(state.Document.PeekElement());
-            if (doc != null)
-            {
-                string title = GetUnscopedParameter(parameters);
-                doc.AddTitleLine(title.Trim());
-            }
-            state.ShouldPopCommandScope = true;
         }
 
         private void ParseAuthor(ParserState state, string parameters)
@@ -123,7 +108,7 @@ namespace LaTexParser.Packages
             if (doc != null)
             {
                 string author = GetParameter(parameters);
-                doc.AddAuthor(author.Trim());
+                doc.AddAuthor(author);
             }
         }
 
@@ -133,7 +118,7 @@ namespace LaTexParser.Packages
             if (doc != null)
             {
                 string date = GetParameter(parameters);
-                doc.Date = date.Trim();
+                doc.Date = date;
             }
         }
 
@@ -143,7 +128,9 @@ namespace LaTexParser.Packages
             if (doc != null)
             {
                 string thanks = GetParameter(parameters);
-                doc.AddAuthorThanks(thanks.Trim());
+                if (thanks.IndexOf('\n') != -1)
+                    throw new Exceptions.InvalidLaTexSyntaxException("A line break is illegal within a \thanks command.");
+                doc.AddAuthorThanks(thanks);
             }
         }
 
@@ -153,7 +140,7 @@ namespace LaTexParser.Packages
             if (doc != null)
             {
                 string author = GetUnscopedParameter(parameters);
-                doc.AddAuthor(author.Trim());
+                doc.AddAuthor(author);
             }
             state.ShouldPopCommandScope = true;
         }

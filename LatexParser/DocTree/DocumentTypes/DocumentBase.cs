@@ -32,9 +32,10 @@ namespace LaTexParser.DocTree.DocumentTypes
             get { return fontSize; }
         }
 
-        public List<string> Title
+        public string Title
         {
-            get { return titleLines; }
+            get { return title; }
+            set { title = value; }
         }
 
         public List<AuthorEntry> Authors
@@ -54,13 +55,7 @@ namespace LaTexParser.DocTree.DocumentTypes
         {
             this.fontSize = fontSize;
             this.layoutFlags = layoutFlags;
-            titleLines = new List<string>();
             authors = new List<AuthorEntry>();
-        }
-
-        public void AddTitleLine(string newLine)
-        {
-            titleLines.Add(newLine);
         }
 
         public void AddAuthor(string author)
@@ -71,16 +66,25 @@ namespace LaTexParser.DocTree.DocumentTypes
             authors.Add(entry);
         }
 
+        public void AddAuthorLine(string author)
+        {
+            AuthorEntry currentEntry = authors[authors.Count - 1];
+            currentEntry.Author += '\n' + author;
+            authors[authors.Count - 1] = currentEntry;
+        }
+
         public void AddAuthorThanks(string thanks)
         {
-
+            AuthorEntry currentEntry = authors[authors.Count - 1];
+            currentEntry.Thanks = thanks;
+            authors[authors.Count - 1] = currentEntry;
         }
         #endregion
 
         #region Protected Fields
         int fontSize;
         LayoutFlags layoutFlags;
-        List<string> titleLines;
+        string title;
         List<AuthorEntry> authors;
         string date;
         #endregion
