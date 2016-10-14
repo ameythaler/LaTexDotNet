@@ -17,7 +17,12 @@ namespace LaTexParser.Packages
         #endregion
 
         #region Public Methods
-        public BasePackage()
+        public override PackageBase CreateNew()
+        {
+            return new BasePackage();
+        }
+
+        public override PackageBase Initialize(BasePackage basePackage)
         {
             commands = new Dictionary<string, CommandPair>();
             authorCommands = new Dictionary<string, CommandPair>();
@@ -31,6 +36,8 @@ namespace LaTexParser.Packages
 
             authorCommands["thanks"] = new CommandPair(ParseAuthorThanks, null);
             authorCommands["and"] = new CommandPair(ParseAuthorAnd, null);
+
+            return this;
         }
         #endregion
 

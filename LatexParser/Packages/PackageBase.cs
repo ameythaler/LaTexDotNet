@@ -32,6 +32,9 @@ namespace LaTexParser.Packages
         #endregion
 
         #region Public Methods
+        public abstract PackageBase Initialize(BasePackage basePackage);
+        public abstract PackageBase CreateNew();
+
         public bool Parse(ParserState state, string text)
         {
             Dictionary<string, CommandPair> commandList = commands;

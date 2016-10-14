@@ -50,6 +50,7 @@
     <Compile Include="Exceptions\LaTexException.cs" />
     <Compile Include="Packages\BasePackage.cs" />
     <Compile Include="Packages\PackageBase.cs" />
+    <Compile Include="Packages\PackageFactory.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="ParserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

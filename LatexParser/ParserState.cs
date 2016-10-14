@@ -37,7 +37,8 @@ namespace LaTexParser
         {
             document = new Document();
             loadedPackages = new List<Packages.PackageBase>();
-            loadedPackages.Add(new Packages.BasePackage());
+            basePackage = Packages.PackageFactory.GetPackage("basepackage").Initialize(null) as Packages.BasePackage;
+            loadedPackages.Add(basePackage);
             commandScopeStack = new List<string>();
             shouldPopCommandScope = false;
         }
@@ -75,6 +76,7 @@ namespace LaTexParser
         private List<Packages.PackageBase> loadedPackages;
         private List<string> commandScopeStack;
         private bool shouldPopCommandScope;
+        private Packages.BasePackage basePackage;
         #endregion
     }
 }
