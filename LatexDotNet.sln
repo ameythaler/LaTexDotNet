@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFTest", "WPFTest\WPFTest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaTexViewWPF", "LaTexTextViewWPF\LaTexViewWPF.csproj", "{C1644383-84AD-4B67-9117-CB5A5051F27E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserTest", "ParserTest\ParserTest.csproj", "{89F66AB2-A987-4C9F-8813-80A690AF13C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C1644383-84AD-4B67-9117-CB5A5051F27E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1644383-84AD-4B67-9117-CB5A5051F27E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1644383-84AD-4B67-9117-CB5A5051F27E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89F66AB2-A987-4C9F-8813-80A690AF13C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F66AB2-A987-4C9F-8813-80A690AF13C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F66AB2-A987-4C9F-8813-80A690AF13C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F66AB2-A987-4C9F-8813-80A690AF13C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
