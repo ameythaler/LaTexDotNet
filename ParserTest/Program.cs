@@ -26,13 +26,19 @@ namespace ParserTest
             Scanner scanner = new Scanner(testString);
 
 
-            while(!scanner.LastChar)
-                System.Console.WriteLine(scanner.NextChar());
+            while (!scanner.LastChar)
+            {
+                char cur = scanner.NextChar();
+                System.Console.WriteLine("(" + scanner.LineNumber + "," + scanner.CharNumber + "): " + cur);
+            }
 
             System.Console.WriteLine("=== Reverse ===");
 
             while (!scanner.FirstChar)
-                System.Console.WriteLine(scanner.PrevChar());
+            {
+                char cur = scanner.PrevChar();
+                System.Console.WriteLine("(" + scanner.LineNumber + "," + scanner.CharNumber + "): " + cur);
+            }
 
             System.Console.ReadKey();
         }

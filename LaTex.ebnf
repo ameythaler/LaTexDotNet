@@ -1,16 +1,17 @@
 (* LaTex EBNF definition *)
 alphabetic = ? upper and lowercase letters ? ;
 new line = "\n\r" | "\n" | "\r" ;
-whitespace = " " | new line ;
+whitespace = " " | "\t" | new line ;
 escaped symbol = "#" | "$" | "%" | "&" | "_" | "{" | "}" ;
-special character = "." | ":" | ";" | "," | "?" | "!" | "'" | '"' | "(" | ")" | "[" | "]" | "-" | "/" | "*" | "@" ;
+special character = "." | ":" | ";" | "," | "?" | "!" | "'" | '"' | "(" | ")" | "[" | "]" | "-" | "/" | "*" | "@";
 digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
 escape character = "\" , escaped symbol ;
 font = "\" , { "rm" | "bf" | "sf" | "it" | "em" | "sl" | "sc" | "tt" } ;
 typesize = "\" , { "tiny" | "scriptsize" | "footnotesize" | "small" | "normalsize"
 				 | "large" | "Large" | "LARGE" | "huge" | "Huge" } ;
 line break = "\\" ;
-character = { alphabetic | whitespace | special character | digit | escape character | font | typesize | linebreak }
+character = { alphabetic | whitespace | special character | digit | escape character | font | typesize | linebreak } ;
 text = character , { character } ;
 func = "\" , alphabetic , { alphabetic | digit } , [ " " ] , [ "[" , ( func | text , { func | text } ) , "]" ] 
 	 , { "{", { func | text } , "}" } ;
+comment = "%", { text }, new line ;

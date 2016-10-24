@@ -48,6 +48,7 @@
     <Compile Include="Exceptions\InvalidLaTexDataException.cs" />
     <Compile Include="Exceptions\InvalidLaTexSyntaxException.cs" />
     <Compile Include="Exceptions\LaTexException.cs" />
+    <Compile Include="Lexer.cs" />
     <Compile Include="Packages\BasePackage.cs" />
     <Compile Include="Packages\PackageBase.cs" />
     <Compile Include="Packages\PackageFactory.cs" />
@@ -55,6 +56,8 @@
     <Compile Include="ParserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scanner.cs" />
+    <Compile Include="Tokens\EofToken.cs" />
+    <Compile Include="Tokens\Token.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup />
