@@ -56,7 +56,11 @@
     <Compile Include="ParserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scanner.cs" />
+    <Compile Include="Tokens\ContentToken.cs" />
     <Compile Include="Tokens\EofToken.cs" />
+    <Compile Include="Tokens\IdentifierToken.cs" />
+    <Compile Include="Tokens\ParameterToken.cs" />
+    <Compile Include="Tokens\TextToken.cs" />
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace LaTexParser.Tokens
 {
-    public abstract class Token
+    class TextToken : ContentToken
     {
         #region Public Methods
-        public 
+        public TextToken(string content) : base(content)
+        {
+        }
         #endregion
     }
 }
