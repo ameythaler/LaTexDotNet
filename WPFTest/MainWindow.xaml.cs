@@ -27,13 +27,13 @@ namespace WPFTest
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            LaTexParser.Parser parser = new LaTexParser.Parser();
-            string laTex = textBox.Text;
+            //LaTexParser.Parser parser = new LaTexParser.Parser();
+            //string laTex = textBox.Text;
 
-            while(laTex != null)
-            {
-                laTex = parser.Parse(laTex);
-            }
+            //while(laTex != null)
+            //{
+            //    laTex = parser.Parse(laTex);
+            //}
         }
     }
 }
